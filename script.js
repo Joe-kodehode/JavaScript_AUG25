@@ -1,136 +1,108 @@
-// ------------------------------
-// Section 1: Variables, Data Types, and Operators
-// ------------------------------
+// Lesson 6 - Functions / Methods recap (and introducing math.random)
 
-// when naming variables or functions in JavaScript we use camelCase, which is when the first letter is lowercase and the first letter of subsequent words is uppercase
+// --------------------------------------
+// Section 1: Check if a list includes an item (function, ternary, array)
+// --------------------------------------
 
-// Scenario: An online store managing product details.
-const storeName = "Tech Haven"; // string
-const productName = "Wireless Headphones"; // string
-let productPrice = 75; // number (integer)
-let productQuantity = 4; // number
-let isInStock = true; // boolean (true/false)
-let productTags = ["audio", "wireless", "accessory"]; // Array
-let discount; // undefined
+const shoppingList = ["milk", "bread", "cheese", "catfood"];
 
-// console.log("Store Name:", storeName);
-// console.log("Product Name:", productName);
-// console.log("Product Price:", productPrice);
-// console.log("Product Quantity:", productQuantity);
-// console.log("In Stock?", isInStock);
-// console.log("Product Tags:", productTags);
-// console.log("Discount:", discount);
-
-// Targeting specific elements in an array
-console.log(productTags[1]);
-
-// Calculate the total cost for the available quantity.
-
-const totalCost = productPrice * productQuantity;
-console.log(totalCost);
-
-// reassigning product price to be 10 greater
-productPrice = productPrice + 10;
-
-// doing the same as the line aboove, but with the shorthand, use this
-productPrice += 10;
-console.log(productPrice);
-
-// when incrementing by 1, we use ++
-productQuantity++;
-console.log(productQuantity);
-
-// when decrementing by 1, we use --
-productQuantity--;
-console.log(productQuantity);
-
-// the modulus operator calculates the remainder between two numbers.
-const remainder = totalCost % 145;
-console.log(remainder);
-
-// ------------------------------
-// Section 2: Conditionals and Logical Operators
-// ------------------------------
-
-// Example: Decide promotion messages based on total basket size.
-
-let basketSize = 235;
-
-if (basketSize > 300) {
-  console.log("Congratulations! You qualify for free delivery!");
-} else if (basketSize > 200) {
-  console.log(
-    `You're close to getting free delivery, spend 300 or more to be eligble, your current basket size is: ${basketSize}`
-  );
-} else {
-  console.log("Spend 300 or more to get free delivery");
+function checkItem(item) {
+  const result = shoppingList.includes(item);
+  return `The list ${result ? "does" : "doesnt"} include ${item}`;
 }
 
-// Logical operators: Using AND (&&) and OR (||)
-// Scenario: Show a discount message if the product is in stock and either it's on sale or the quantity is high.
-let isOnSale = true;
+console.log(checkItem("bread"));
+console.log(checkItem("water"));
+console.log(checkItem("catfood"));
 
-// productQuantity += 20;
+// --------------------------------------
+// Section 2: Convert a Sentence into Kebab Case (function, methods)
+// --------------------------------------
 
-if (isInStock && (isOnSale || productQuantity > 10)) {
-  console.log("This product is on a discount!");
+function toKebabCase(string) {
+  return string.trim().toLowerCase().split(" ").join("-");
 }
 
-// ------------------------------
-// Section 3: typeof Operator and Truthy/Falsey Values
-// ------------------------------
+console.log(toKebabCase("  Hello World From JavaScript  "));
+console.log(toKebabCase("  This iS us TesTing oUR fuNCtIoN  "));
 
-console.log(typeof storeName);
-console.log(typeof productPrice);
-console.log(typeof isInStock);
+// --------------------------------------
+// Section 3: Checking if a word is a palindrome (function, methods)
+// --------------------------------------
 
-if (discount) {
-  console.log("truthy");
-} else {
-  console.log("falsey");
+function isPalindrome(word) {
+  const lower = word.toLowerCase();
+
+  if (lower === lower.split("").toReversed().join("")) {
+    return `${word} is a palindrome`;
+  } else {
+    return `${word} is not a palindrome`;
+  }
 }
 
-// a string with content is truthy
-// an empty string is falsey
-// a positive number is truthy
-// a negative number is truthy
-// zero is falsey
-// true is truthy
-// false is falsey
-// undefined is falsey
+console.log(isPalindrome("Racecar")); //true
+console.log(isPalindrome("banana")); //false
+console.log(isPalindrome("Hello")); //false
+console.log(isPalindrome("asdffdsa")); //true
 
-// Conditional for calculating membership discount.
-const isMember = true;
+// --------------------------------------
+// Section 5: Introduction to Math.random
+// --------------------------------------
 
-// Using if / else if
-if (isMember) {
-  console.log("You get a discount");
-} else {
-  console.log("You don't get a discount");
-}
+// random number between 0-10
 
-// Same example but with Ternary conditional to set a member discount (or not)
+// Math.random() gives a random number between 0.0000000 - 0.9999999
 
-let memberDiscount = isMember
-  ? "You get a discount"
-  : "You don't get a discount";
-console.log(memberDiscount);
+//random number between 0-10
+console.log(Math.floor(Math.random() * 11));
 
-// Same example but combining with template literal
-// let memberDiscount = `You${isMember ? "" : " don't"} get a discount`;
+// random number between 1-100
+console.log(Math.floor(Math.random() * 100) + 1);
 
-console.log(memberDiscount);
+const pokemon = [
+  "pikachu",
+  "diglett",
+  "electrode",
+  "machop",
+  "magikarp",
+  "mew",
+  "blastoise",
+  "vaporeon",
+  "psyduck",
+  "meowth",
+  "charmander",
+  "Mr.Mime",
+];
 
-// --------------------------------------------------
-// Section 4: Template Literals (Template Strings) Recap
-// --------------------------------------------------
+const randomIndex = Math.floor(Math.random() * pokemon.length);
 
-const firstName = "Alex";
-const lastName = "Miller";
+console.log(`Your starter pokemon is: ${pokemon[randomIndex]}`);
 
-// const welcomeMessage =
-//   "Welcome" + " " + firstName + " " + lastName + " " + "to my site";
+// --------------------------------------
+// Section 7: Rock, paper scissors (function, switch case, Math.random)
+// --------------------------------------
 
-const welcomeMessage = `Welcome ${firstName} ${lastName} to my site`;
+const rockPaperScissors = (userInput, aiInput) => {
+  switch (userInput + aiInput) {
+    case "rock" + "rock":
+    case "paper" + "paper":
+    case "scissors" + "scissors":
+      return "it's a draw";
+    case "rock" + "scissors":
+    case "scissors" + "paper":
+    case "paper" + "rock":
+      return "user wins";
+    default:
+      return "ai wins";
+  }
+};
 
-console.log(welcomeMessage);
+// Making things random with Math.random
+
+const possibleAnswers = ["rock", "paper", "scissors"];
+
+let randomNumber = Math.floor(Math.random() * 3);
+
+let aiAnswer = possibleAnswers[randomNumber];
+
+console.log(rockPaperScissors("rock", aiAnswer));
